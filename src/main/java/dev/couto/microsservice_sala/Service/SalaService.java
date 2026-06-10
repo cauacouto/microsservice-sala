@@ -8,6 +8,8 @@ import dev.couto.microsservice_sala.Mapper.SalaMapper;
 import dev.couto.microsservice_sala.Repository.SalaRepository;
 import dev.couto.microsservice_sala.domin.Sala;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -29,6 +31,30 @@ public class SalaService {
             var salvar = salaRepository.save(sala);
         return salaMapper.toDto(salvar);
     }
+
+     public Page<SalaResponseDto> listarSalas(Pageable page){
+      return salaRepository.findAll(page)
+                .map(salaMapper::toDto);
+
+     }
+
+     public SalaResponseDto atualizarSala(SalaRequestDto request,Integer id){
+        Sala sala = salaRepository.findById(id).orElseThrow();
+         sala.setNomeSala(request.nomeSala());
+         sala.setStatusSala(StatusSala.ATIVA);
+         sala.setAtiva(true);
+         sala.setCapacidade(request.capacidade());
+         if (sala.getCapacidade() <= 0){
+             throw new IllegalArgumentException("sala não pode possuir capacidade menor ou igual a zero.");
+         }
+         var salvar = salaRepository.save(sala);
+         return salaMapper.toDto(salvar);
+     }
+
+
+     public void deletarSala(Integer id){
+        this.salaRepository.deleteById(id);
+     }
 
 
     public void inativarSala(Integer id){
