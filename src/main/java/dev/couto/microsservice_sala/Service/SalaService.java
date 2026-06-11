@@ -51,6 +51,19 @@ public class SalaService {
          return salaMapper.toDto(salvar);
      }
 
+     public SalaResponseDto buscarPorId(Integer id){
+        Sala sala = salaRepository.findById(id).
+                orElseThrow(()-> new RuntimeException("sala não encontrada"));
+
+        return new SalaResponseDto(
+        sala.getId(),
+        sala.getNomeSala(),
+        sala.getCapacidade(),
+        sala.getStatusSala()
+        );
+
+     }
+
 
      public void deletarSala(Integer id){
         this.salaRepository.deleteById(id);
