@@ -5,7 +5,7 @@ import dev.couto.microsservice_sala.Enum.StatusSala;
 public record SalaResponseDto(
         Integer id,
         String nomeSala,
-        int capacidade,
+        Integer capacidade,
         StatusSala status
 ) {
 }
