@@ -55,12 +55,7 @@ public class SalaService {
         Sala sala = salaRepository.findById(id).
                 orElseThrow(()-> new RuntimeException("sala não encontrada"));
 
-        return new SalaResponseDto(
-        sala.getId(),
-        sala.getNomeSala(),
-        sala.getCapacidade(),
-        sala.getStatusSala()
-        );
+            return salaMapper.toDto(sala);
 
      }
 
