@@ -31,6 +31,12 @@ public class SalaController {
 
 
     }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<SalaResponseDto> buscarPorId(@PathVariable Integer id){
+        return ResponseEntity.ok(salaService.buscarPorId(id));
+    }
+
     @PatchMapping
     public ResponseEntity<SalaResponseDto> atualizarSala(@RequestBody SalaRequestDto request,@PathVariable Integer id){
         this.salaService.atualizarSala(request, id);
