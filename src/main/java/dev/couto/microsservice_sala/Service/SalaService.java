@@ -40,14 +40,20 @@ public class SalaService {
 
      public SalaResponseDto atualizarSala(SalaRequestDto request,Integer id){
         Sala sala = salaRepository.findById(id).orElseThrow();
-         sala.setNomeSala(request.nomeSala());
-         sala.setStatusSala(StatusSala.ATIVA);
-         sala.setAtiva(true);
-         sala.setCapacidade(request.capacidade());
-         if (sala.getCapacidade() <= 0){
-             throw new IllegalArgumentException("sala não pode possuir capacidade menor ou igual a zero.");
+
+         if (request.nomeSala() != null){
+             sala.setNomeSala(request.nomeSala());
          }
-         var salvar = salaRepository.save(sala);
+
+               if (request.capacidade() != null){
+
+             if (request.capacidade() <= 0) {
+                 throw new IllegalArgumentException("sala não pode possuir capacidade menor ou igual a zero.");
+
+             }
+             sala.setCapacidade(request.capacidade());
+         }
+         Sala salvar = salaRepository.save(sala);
          return salaMapper.toDto(salvar);
      }
 
@@ -73,3 +79,4 @@ public class SalaService {
     }
 
 }
+
