@@ -22,7 +22,7 @@ public class Sala implements Serializable {
 
     private Integer id;
     private String nomeSala;
-    private int capacidade;
+    private Integer capacidade;
     private boolean ativa;
     @Enumerated(EnumType.STRING)
     private StatusSala statusSala;
