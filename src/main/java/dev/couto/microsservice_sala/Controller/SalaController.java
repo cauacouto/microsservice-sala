@@ -37,7 +37,7 @@ public class SalaController {
         return ResponseEntity.ok(salaService.buscarPorId(id));
     }
 
-    @PatchMapping
+    @PatchMapping("/{id}")
     public ResponseEntity<SalaResponseDto> atualizarSala(@RequestBody SalaRequestDto request,@PathVariable Integer id){
         this.salaService.atualizarSala(request, id);
         return ResponseEntity.ok().build();
@@ -50,7 +50,7 @@ public class SalaController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deletarSala(Integer id){
+    public ResponseEntity<Void> deletarSala(@PathVariable Integer id){
         this.salaService.deletarSala(id);
         return ResponseEntity.noContent().build();    }
 
