@@ -2,6 +2,6 @@ package dev.couto.microsservice_sala.Dto;
 
 public record SalaRequestDto(
         String nomeSala,
-        int capacidade
+        Integer capacidade
 ) {
 }
